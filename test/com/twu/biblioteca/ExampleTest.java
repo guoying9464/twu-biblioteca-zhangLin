@@ -21,9 +21,18 @@ public class ExampleTest {
 
     @Test
     public void testWelcomeMessage() {
-        String[] args = {};
-        BibliotecaApp.main(args);
+        BibliotecaApp.WelcomeMessagePrinter();
+        assertThat(output.toString(), is("Welcome to Bibliteca!\n"));
+    }
 
-        assertThat(output.toString(), is("Welcome to Bibliteca!"));
+    @Test
+    public void testBookList() throws Exception {
+        String expect = "BookList:\n" +
+                "The Adventures of Sherlock Holmes\n" +
+                "Grimm's Fairy Tales\n" +
+                "Wuthering Heights\n" +
+                "Moon and Sixpence\n";
+        BibliotecaApp.BookList();
+        assertThat(output.toString(), is(expect));
     }
 }
