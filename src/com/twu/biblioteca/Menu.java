@@ -11,7 +11,7 @@ public class Menu {
         this.menu = menu;
     }
 
-    public boolean isVaild(int option){
+    public boolean isVaild(int option) {
         return menu.containsKey(option);
     }
 
@@ -21,6 +21,6 @@ public class Menu {
         menu.entrySet().stream().forEach(entry ->
                 result.add(String.format("%d\t%s",
                         entry.getKey(), entry.getValue())));
-        return  String.join("\n",result);
+        return String.join("\n", result);
     }
 }

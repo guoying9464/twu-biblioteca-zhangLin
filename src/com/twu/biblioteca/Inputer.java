@@ -9,7 +9,7 @@ public class Inputer {
         this.scanner = new Scanner(System.in);
     }
 
-    public int option(){
-        return scanner.nextInt();
+    public String option(){
+        return scanner.next();
     }
 }

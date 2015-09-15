@@ -18,22 +18,35 @@ public class BibliotecaApp {
 
         Map<Integer, String> menuItem = new HashMap<>();
         menuItem.put(1, "BookList");
+        menuItem.put(2, "Quit");
         Menu menu = new Menu(menuItem);
 
         Printer printer = new Printer();
         printer.print(WELCOME_MESSAGE);
         Inputer inputer = new Inputer();
-        
+
         while (true){
             printer.print(menu);
-            int option = inputer.option();
+            int option = getOption(inputer);
             if(menu.isVaild(option)){
-                if(option == 1){
+                if(menuItem.get(option).equals("BookList")){
                     printer.print(bookList);
+                }
+                else if(menuItem.get(option).equals("Quit")){
+                    break;
                 }
             }else {
                 printer.print(VALID_OPTION_MESSAGE);
             }
+        }
+    }
+
+    private static int getOption(Inputer inputer) {
+        try {
+            return Integer.parseInt(inputer.option());
+
+        } catch (Exception exception) {
+            return -1;
         }
     }
 
