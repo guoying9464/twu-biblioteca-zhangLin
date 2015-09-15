@@ -6,7 +6,9 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -43,5 +45,20 @@ public class PrinterTest {
                         "Moon and Sixpence\tW. Somerset\t2012\n";
         printer.print(bookList);
         assertThat(output.toString(), is(expect));
+    }
+
+    @Test
+    public void testMenunPrinter() throws Exception {
+        Map<Integer, String> menuItem = new HashMap<>();
+        menuItem.put(1, "Introduce");
+        menuItem.put(2, "BookList");
+
+        Menu menu = new Menu(menuItem);
+
+        String expect =
+                "1\tIntroduce\n2\tBookList\n";
+        printer.print(menu);
+        assertThat(output.toString(), is(expect));
+
     }
 }

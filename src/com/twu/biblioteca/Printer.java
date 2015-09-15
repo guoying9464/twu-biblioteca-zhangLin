@@ -11,4 +11,7 @@ public class Printer {
         books.stream().forEach(book -> print(book.toString()));
     }
 
+    public void print(Menu menu) {
+        print(menu.toString());
+    }
 }

@@ -17,6 +17,6 @@ public class Menu {
         menu.entrySet().stream().forEach(entry ->
                 result.add(String.format("%d\t%s",
                         entry.getKey(), entry.getValue())));
-        return result.toString();
+        return  String.join("\n",result);
     }
 }
