@@ -11,6 +11,10 @@ public class Menu {
         this.menu = menu;
     }
 
+    public boolean isVaild(int option){
+        return menu.containsKey(option);
+    }
+
     @Override
     public String toString() {
         List<String> result = new ArrayList();

@@ -8,6 +8,7 @@ import java.util.Map;
 public class BibliotecaApp {
 
     public static final String WELCOME_MESSAGE = "Welcome to Bibliteca!";
+    public static final String VALID_OPTION_MESSAGE = "Select a valid option!";
 
     public static void main(String[] args) {
         List<Book> bookList = new ArrayList<>();
@@ -21,11 +22,18 @@ public class BibliotecaApp {
 
         Printer printer = new Printer();
         printer.print(WELCOME_MESSAGE);
-        printer.print(menu);
-
         Inputer inputer = new Inputer();
-        if(inputer.option() == 1){
-            printer.print(bookList);
+        
+        while (true){
+            printer.print(menu);
+            int option = inputer.option();
+            if(menu.isVaild(option)){
+                if(option == 1){
+                    printer.print(bookList);
+                }
+            }else {
+                printer.print(VALID_OPTION_MESSAGE);
+            }
         }
     }
 
