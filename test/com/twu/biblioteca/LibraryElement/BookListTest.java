@@ -26,22 +26,22 @@ public class BookListTest {
 
     @Test
     public void testShouldGetBookFromName() throws Exception {
-        Optional<Book> book = bookList.getBook("Grimm's Fairy Tales");
+        Optional<Book> book = bookList.getBorrowableBook("Grimm's Fairy Tales");
         assertTrue(book.isPresent());
         assertThat(book.get().getAuthor(), is("Jacob Grimm"));
     }
 
     @Test
     public void testShouldNotGetBookForIncorrectName() throws Exception {
-        Optional<Book> book = bookList.getBook("ABC");
+        Optional<Book> book = bookList.getBorrowableBook("ABC");
         assertFalse(book.isPresent());
     }
 
     @Test
     public void testCheckOut() throws Exception {
-        Optional<Book> book = bookList.getBook("Grimm's Fairy Tales");
-        bookList.checkOut(book.get());
-        book = bookList.getBook("Grimm's Fairy Tales");
+        Optional<Book> book = bookList.getBorrowableBook("Grimm's Fairy Tales");
+        bookList.checkoutBook(book.get());
+        book = bookList.getBorrowableBook("Grimm's Fairy Tales");
         assertFalse(book.isPresent());
     }
 }

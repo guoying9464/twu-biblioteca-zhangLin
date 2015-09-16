@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public class CheckOut implements Operation{
     public static final String SUCCESS_CHECKOUT_MESSAGE = "Thank you! Enjoy the book";
+    private static final String UNSUCCESS_CHECKOUT_MESSAGE = "That book is not available.";
     private Printer printer;
     private Inputer inputer;
     private BookList bookList;
@@ -23,15 +24,17 @@ public class CheckOut implements Operation{
     public void operate() {
         printer.print("Please Input Book's Name:");
         printer.print(bookList.getBookList());
-        Optional<Book> checkoutBook = bookList.getBook(inputer.input());
+        Optional<Book> checkoutBook = bookList.getBorrowableBook(inputer.input());
         if(checkoutBook.isPresent()){
-            bookList.checkOut(checkoutBook.get());
+            bookList.checkoutBook(checkoutBook.get());
             printer.print(SUCCESS_CHECKOUT_MESSAGE);
+        }else {
+            printer.print(UNSUCCESS_CHECKOUT_MESSAGE);
         }
     }
 
     @Override
     public String toString() {
-        return "CheckOut";
+        return "CheckOut Book";
     }
 }

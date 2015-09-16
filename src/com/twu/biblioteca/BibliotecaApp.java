@@ -3,10 +3,7 @@ package com.twu.biblioteca;
 import com.twu.biblioteca.LibraryElement.Book;
 import com.twu.biblioteca.LibraryElement.BookList;
 import com.twu.biblioteca.LibraryElement.Menu;
-import com.twu.biblioteca.userOperation.CheckOut;
-import com.twu.biblioteca.userOperation.SearchCatalog;
-import com.twu.biblioteca.userOperation.Operation;
-import com.twu.biblioteca.userOperation.Quit;
+import com.twu.biblioteca.userOperation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +28,8 @@ public class BibliotecaApp {
         Map<Integer, Operation> menuItem = new HashMap<>();
         menuItem.put(1, new SearchCatalog(bookList, printer));
         menuItem.put(2, new CheckOut(printer, inputer, bookList));
-        menuItem.put(3, new Quit());
+        menuItem.put(3, new Return(printer, inputer, bookList));
+        menuItem.put(4, new Quit());
         Menu menu = new Menu(menuItem);
 
         printer.print(WELCOME_MESSAGE);
