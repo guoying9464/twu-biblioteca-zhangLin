@@ -1,27 +1,25 @@
 package com.twu.biblioteca.userOperation;
 
-import com.twu.biblioteca.Book;
+import com.twu.biblioteca.LibraryElement.BookList;
 import com.twu.biblioteca.Printer;
 
-import java.util.List;
+public class SearchCatalog implements Operation{
 
-public class BookList implements Operation{
-
-    private List<Book> bookList;
+    private BookList bookList;
     private Printer printer;
 
-    public BookList(List<Book> bookList, Printer printer) {
+    public SearchCatalog(BookList bookList, Printer printer) {
         this.bookList = bookList;
         this.printer = printer;
     }
 
     @Override
     public void operate() {
-        printer.print(bookList);
+        printer.print(bookList.getBookList());
     }
 
     @Override
     public String toString() {
-        return "BookList";
+        return "SearchCatalog";
     }
 }

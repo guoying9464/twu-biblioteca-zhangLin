@@ -1,5 +1,8 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.LibraryElement.Book;
+import com.twu.biblioteca.LibraryElement.Menu;
+
 import java.util.List;
 
 public class Printer {
