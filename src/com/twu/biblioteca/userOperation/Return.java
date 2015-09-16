@@ -8,6 +8,8 @@ import com.twu.biblioteca.Printer;
 import java.util.Optional;
 
 public class Return implements Operation {
+    public static final String SUCCESSFUL_RETURN_MESSAGE = "Thank you for returning the book.";
+    public static final String UNSUCCESSFUL_RETURN_MESSAGE = "Thank you for returning the book.";
     private Printer printer;
     private Inputer inputer;
     private BookList bookList;
@@ -24,6 +26,7 @@ public class Return implements Operation {
         Optional<Book> returnBook = bookList.getReturnableBook(inputer.input());
         if (returnBook.isPresent()) {
             bookList.returnBook(returnBook.get());
+            printer.print(SUCCESSFUL_RETURN_MESSAGE);
         }
     }
 
