@@ -1,13 +1,15 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.userOperation.Operation;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class Menu {
-    private Map<Integer, String> menu;
+    private Map<Integer, Operation> menu;
 
-    public Menu(Map<Integer, String> menu) {
+    public Menu(Map<Integer, Operation> menu) {
         this.menu = menu;
     }
 
@@ -20,7 +22,7 @@ public class Menu {
         List<String> result = new ArrayList();
         menu.entrySet().stream().forEach(entry ->
                 result.add(String.format("%d\t%s",
-                        entry.getKey(), entry.getValue())));
+                        entry.getKey(), entry.getValue().toString())));
         return String.join("\n", result);
     }
 }
