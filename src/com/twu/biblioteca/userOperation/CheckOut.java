@@ -8,6 +8,7 @@ import com.twu.biblioteca.Printer;
 import java.util.Optional;
 
 public class CheckOut implements Operation{
+    public static final String SUCCESS_CHECKOUT_MESSAGE = "Thank you! Enjoy the book";
     private Printer printer;
     private Inputer inputer;
     private BookList bookList;
@@ -25,7 +26,7 @@ public class CheckOut implements Operation{
         Optional<Book> checkoutBook = bookList.getBook(inputer.input());
         if(checkoutBook.isPresent()){
             bookList.checkOut(checkoutBook.get());
-            printer.print(bookList.getBookList());
+            printer.print(SUCCESS_CHECKOUT_MESSAGE);
         }
     }
 
