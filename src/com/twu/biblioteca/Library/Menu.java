@@ -1,4 +1,4 @@
-package com.twu.biblioteca.LibraryElement;
+package com.twu.biblioteca.library;
 
 import com.twu.biblioteca.userOperation.Operation;
 

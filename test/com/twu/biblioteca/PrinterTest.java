@@ -1,11 +1,10 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.LibraryElement.Book;
-import com.twu.biblioteca.LibraryElement.BookList;
-import com.twu.biblioteca.LibraryElement.Menu;
-import com.twu.biblioteca.userOperation.SearchCatalog;
+import com.twu.biblioteca.library.Book;
+import com.twu.biblioteca.library.Menu;
 import com.twu.biblioteca.userOperation.Operation;
 import com.twu.biblioteca.userOperation.Quit;
+import com.twu.biblioteca.userOperation.SearchCatalog;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -53,9 +52,8 @@ public class PrinterTest {
 
     @Test
     public void testMenunPrinter() throws Exception {
-        BookList bookList = new BookList(books);
         Map<Integer, Operation> menuItem = new HashMap<>();
-        menuItem.put(1, new SearchCatalog(bookList,printer));
+        menuItem.put(1, new SearchCatalog(books,printer));
         menuItem.put(2, new Quit());
 
         Menu menu = new Menu(menuItem);

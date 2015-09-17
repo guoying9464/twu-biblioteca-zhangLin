@@ -1,14 +1,14 @@
-package com.twu.biblioteca.LibraryElement;
+package com.twu.biblioteca.library;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class BookList {
+public class Librarian {
     List<Book> bookList;
     List<Book> checkoutList;
 
-    public BookList(List<Book> bookList) {
+    public Librarian(List<Book> bookList) {
         this.bookList = bookList;
         this.checkoutList = new ArrayList<>();
     }

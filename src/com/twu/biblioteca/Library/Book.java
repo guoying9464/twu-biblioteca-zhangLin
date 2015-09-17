@@ -1,4 +1,4 @@
-package com.twu.biblioteca.LibraryElement;
+package com.twu.biblioteca.library;
 
 public class Book {
     public Book(String name, String author, String year) {

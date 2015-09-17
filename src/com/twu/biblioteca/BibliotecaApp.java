@@ -1,8 +1,8 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.LibraryElement.Book;
-import com.twu.biblioteca.LibraryElement.BookList;
-import com.twu.biblioteca.LibraryElement.Menu;
+import com.twu.biblioteca.library.Book;
+import com.twu.biblioteca.library.Librarian;
+import com.twu.biblioteca.library.Menu;
 import com.twu.biblioteca.userOperation.*;
 
 import java.util.ArrayList;
@@ -21,14 +21,14 @@ public class BibliotecaApp {
         books.add(new Book("Wuthering Heights", "Emily Bronte", "2011"));
         books.add(new Book("Moon and Sixpence", "W. Somerset", "2012"));
 
-        BookList bookList = new BookList(books);
+        Librarian librarian = new Librarian(books);
         Printer printer = new Printer();
         Inputer inputer = new Inputer();
 
         Map<Integer, Operation> menuItem = new HashMap<>();
-        menuItem.put(1, new SearchCatalog(bookList, printer));
-        menuItem.put(2, new CheckOut(printer, inputer, bookList));
-        menuItem.put(3, new Return(printer, inputer, bookList));
+        menuItem.put(1, new SearchCatalog(books, printer));
+        menuItem.put(2, new CheckOut(printer, inputer, librarian));
+        menuItem.put(3, new Return(printer, inputer, librarian));
         menuItem.put(4, new Quit());
         Menu menu = new Menu(menuItem);
 
