@@ -1,11 +1,8 @@
 package com.twu.biblioteca.userOperation;
 
 import com.twu.biblioteca.Inputer;
-import com.twu.biblioteca.library.Book;
-import com.twu.biblioteca.library.Librarian;
 import com.twu.biblioteca.Printer;
-
-import java.util.Optional;
+import com.twu.biblioteca.library.Librarian;
 
 public class Return implements Operation {
     public static final String SUCCESSFUL_RETURN_MESSAGE = "Thank you for returning the book.";
@@ -23,9 +20,11 @@ public class Return implements Operation {
     @Override
     public void operate() {
         printer.print("Please Input Book's Name:");
-        Optional<Book> returnBook = librarian.getReturnableBook(inputer.input());
-        if (returnBook.isPresent()) {
-            librarian.returnBook(returnBook.get());
+
+        String bookName = inputer.input();
+        int result = librarian.returnBook(bookName);
+        if (1 == result) {
+            librarian.returnBook(bookName);
             printer.print(SUCCESSFUL_RETURN_MESSAGE);
         }else{
             printer.print(UNSUCCESSFUL_RETURN_MESSAGE);

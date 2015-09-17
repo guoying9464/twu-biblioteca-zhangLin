@@ -1,37 +1,33 @@
 package com.twu.biblioteca.library;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 public class Librarian {
-    List<Book> bookList;
-    List<Book> checkoutList;
+    private Library library;
 
-    public Librarian(List<Book> bookList) {
-        this.bookList = bookList;
-        this.checkoutList = new ArrayList<>();
+    public Librarian(Library library) {
+        this.library = library;
     }
 
-    public Optional<Book> getBorrowableBook(String name) {
-        return bookList.stream().filter(book -> name.equals(book.getName())).findFirst();
+    public int checkoutBook(String name) {
+        if(library.canCheckout(name)){
+            Book book = library.findBook(name, library.getBookList()).get();
+            library.getBookList().remove(book);
+            library.getCheckoutList().add(book);
+            return 1;
+        }
+        return 0;
     }
 
-    public Optional<Book> getReturnableBook(String name) {
-        return checkoutList.stream().filter(book -> name.equals(book.getName())).findFirst();
+    public int returnBook(String bookName) {
+        if(library.canReturn(bookName)){
+            Book book = library.findBook(bookName, library.getCheckoutList()).get();
+            library.getCheckoutList().remove(book);
+            library.getBookList().add(book);
+            return 1;
+        }
+        return 0;
     }
 
-    public List<Book> getBookList() {
-        return bookList;
-    }
-
-    public void checkoutBook(Book book) {
-        bookList.remove(book);
-        checkoutList.add(book);
-    }
-
-    public void returnBook(Book book) {
-        checkoutList.remove(book);
-        bookList.add(book);
+    public Library getLibrary() {
+        return library;
     }
 }

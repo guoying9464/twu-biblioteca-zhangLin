@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.library.Book;
 import com.twu.biblioteca.library.Librarian;
+import com.twu.biblioteca.library.Library;
 import com.twu.biblioteca.library.Menu;
 import com.twu.biblioteca.userOperation.*;
 
@@ -20,8 +21,9 @@ public class BibliotecaApp {
         books.add(new Book("Grimm's Fairy Tales", "Jacob Grimm", "2011"));
         books.add(new Book("Wuthering Heights", "Emily Bronte", "2011"));
         books.add(new Book("Moon and Sixpence", "W. Somerset", "2012"));
+        Library library = new Library(books);
 
-        Librarian librarian = new Librarian(books);
+        Librarian librarian = new Librarian(library);
         Printer printer = new Printer();
         Inputer inputer = new Inputer();
 

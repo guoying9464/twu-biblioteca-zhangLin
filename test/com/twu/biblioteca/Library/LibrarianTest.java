@@ -5,15 +5,13 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 public class LibrarianTest {
     private List<Book> books = new ArrayList<>();
+    private Library library;
     private Librarian librarian;
 
     @Before
@@ -21,27 +19,39 @@ public class LibrarianTest {
         books.add(new Book("Grimm's Fairy Tales", "Jacob Grimm", "2011"));
         books.add(new Book("Wuthering Heights", "Emily Bronte", "2011"));
         books.add(new Book("Moon and Sixpence", "W. Somerset", "2012"));
-        librarian = new Librarian(books);
+        library = new Library(books);
+        librarian = new Librarian(library);
     }
 
     @Test
-    public void testShouldGetBookFromName() throws Exception {
-        Optional<Book> book = librarian.getBorrowableBook("Grimm's Fairy Tales");
-        assertTrue(book.isPresent());
-        assertThat(book.get().getAuthor(), is("Jacob Grimm"));
+    public void testCanCheckoutBook() throws Exception {
+        int result = librarian.checkoutBook("Grimm's Fairy Tales");
+        assertThat(result, is(1));
     }
 
     @Test
-    public void testShouldNotGetBookForIncorrectName() throws Exception {
-        Optional<Book> book = librarian.getBorrowableBook("ABC");
-        assertFalse(book.isPresent());
+    public void testCannotCheckoutBookForNonexistentBook() throws Exception {
+        int result = librarian.checkoutBook("JAVA");
+        assertThat(result, is(0));
     }
 
     @Test
-    public void testCheckOut() throws Exception {
-        Optional<Book> book = librarian.getBorrowableBook("Grimm's Fairy Tales");
-        librarian.checkoutBook(book.get());
-        book = librarian.getBorrowableBook("Grimm's Fairy Tales");
-        assertFalse(book.isPresent());
+    public void testCannotCheckoutBookForBorrowedBook() throws Exception {
+        librarian.checkoutBook("Grimm's Fairy Tales");
+        int result = librarian.checkoutBook("Grimm's Fairy Tales");
+        assertThat(result, is(0));
+    }
+
+    @Test
+    public void testCanReturnBook() throws Exception {
+        librarian.checkoutBook("Grimm's Fairy Tales");
+        int result = librarian.returnBook("Grimm's Fairy Tales");
+        assertThat(result, is(1));
+    }
+
+    @Test
+    public void testCannotReturnBookForNonexistentBook() throws Exception {
+        int result = librarian.returnBook("JAVA");
+        assertThat(result, is(0));
     }
 }
