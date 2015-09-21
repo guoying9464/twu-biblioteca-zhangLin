@@ -4,32 +4,38 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Library {
-    private List<Book> bookList;
-    private List<Book> checkoutList;
+public class Library<T extends Item > {
+    private List<T> stockList;
+    private List<T> checkoutList;
+    private String name;
 
-    public Library(List<Book> bookList) {
-        this.bookList = bookList;
+    public Library(List<T> stockList, String name) {
+        this.stockList = stockList;
+        this.name = name;
         this.checkoutList = new ArrayList<>();
     }
 
-    public Optional<Book> findBook(String name, List<Book> books) {
-        return books.stream().filter(book -> name.equals(book.getName())).findFirst();
+    public Optional find(String name, List<T> list) {
+        return list.stream().filter(book -> name.equals(book.getName())).findFirst();
     }
 
     public boolean canReturn(String name) {
-        return findBook(name, checkoutList).isPresent();
+        return find(name, checkoutList).isPresent();
     }
 
     public boolean canCheckout(String name) {
-        return findBook(name, bookList).isPresent();
+        return find(name, stockList).isPresent();
     }
 
-    public List<Book> getBookList() {
-        return bookList;
+    public List<T> getStockList() {
+        return stockList;
     }
 
-    public List<Book> getCheckoutList() {
+    public List<T> getCheckoutList() {
         return checkoutList;
+    }
+
+    public String getName() {
+        return name;
     }
 }

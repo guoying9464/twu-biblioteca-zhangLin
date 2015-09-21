@@ -1,9 +1,6 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.library.Book;
-import com.twu.biblioteca.library.Librarian;
-import com.twu.biblioteca.library.Library;
-import com.twu.biblioteca.library.Menu;
+import com.twu.biblioteca.library.*;
 import com.twu.biblioteca.userOperation.*;
 
 import java.util.ArrayList;
@@ -21,17 +18,27 @@ public class BibliotecaApp {
         books.add(new Book("Grimm's Fairy Tales", "Jacob Grimm", "2011"));
         books.add(new Book("Wuthering Heights", "Emily Bronte", "2011"));
         books.add(new Book("Moon and Sixpence", "W. Somerset", "2012"));
-        Library library = new Library(books);
+        Library bookLibrary = new Library(books, "Book");
 
-        Librarian librarian = new Librarian(library);
+        List<Movie> movies = new ArrayList<>();
+        movies.add(new Movie("Gone  Girl", "2014", "David Fincher", 8));
+        movies.add(new Movie("Black Mass", "2015", "Scott  Cooper", 7));
+        movies.add(new Movie("Katti Batti", "2015", "Nikhil Advani", 6));
+        Library movieLibrary = new Library(movies, "Movie");
+
+        Librarian bookLibrarian = new Librarian(bookLibrary);
+        Librarian movieLibrarian = new Librarian(movieLibrary);
         Printer printer = new Printer();
         Inputer inputer = new Inputer();
 
         Map<Integer, Operation> menuItem = new HashMap<>();
         menuItem.put(1, new SearchCatalog(books, printer));
-        menuItem.put(2, new CheckOut(printer, inputer, librarian));
-        menuItem.put(3, new Return(printer, inputer, librarian));
-        menuItem.put(4, new Quit());
+        menuItem.put(2, new SearchCatalog(movies, printer));
+        menuItem.put(3, new CheckOut(printer, inputer, bookLibrarian));
+        menuItem.put(4, new Return(printer, inputer, bookLibrarian));
+        menuItem.put(5, new CheckOut(printer, inputer, movieLibrarian));
+        menuItem.put(6, new Return(printer, inputer, movieLibrarian));
+        menuItem.put(7, new Quit());
         Menu menu = new Menu(menuItem);
 
         printer.print(WELCOME_MESSAGE);
@@ -41,6 +48,7 @@ public class BibliotecaApp {
             int option = getOption(inputer);
             if(menu.isVaild(option)){
                 menuItem.get(option).operate();
+
             }else {
                 printer.print(VALID_OPTION_MESSAGE);
             }

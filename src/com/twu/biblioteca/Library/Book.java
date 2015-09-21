@@ -1,6 +1,6 @@
 package com.twu.biblioteca.library;
 
-public class Book {
+public class Book implements Item{
     public Book(String name, String author, String year) {
         this.name = name;
         this.author = author;
@@ -11,6 +11,7 @@ public class Book {
     private String author;
     private String year;
 
+    @Override
     public String getName() {
         return name;
     }

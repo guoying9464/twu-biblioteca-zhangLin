@@ -7,10 +7,10 @@ public class Librarian {
         this.library = library;
     }
 
-    public int checkoutBook(String name) {
+    public int checkout(String name) {
         if(library.canCheckout(name)){
-            Book book = library.findBook(name, library.getBookList()).get();
-            library.getBookList().remove(book);
+            Object book = library.find(name, library.getStockList()).get();
+            library.getStockList().remove(book);
             library.getCheckoutList().add(book);
             return 1;
         }
@@ -19,9 +19,9 @@ public class Librarian {
 
     public int returnBook(String bookName) {
         if(library.canReturn(bookName)){
-            Book book = library.findBook(bookName, library.getCheckoutList()).get();
+            Object book = library.find(bookName, library.getCheckoutList()).get();
             library.getCheckoutList().remove(book);
-            library.getBookList().add(book);
+            library.getStockList().add(book);
             return 1;
         }
         return 0;

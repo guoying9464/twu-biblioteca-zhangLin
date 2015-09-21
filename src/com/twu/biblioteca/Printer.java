@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.library.Book;
 import com.twu.biblioteca.library.Menu;
 
 import java.util.List;
@@ -10,8 +9,8 @@ public class Printer {
         System.out.println(message);
     }
 
-    public void print(List<Book> books){
-        books.stream().forEach(book -> print(book.toString()));
+    public void print(List list){
+        list.stream().forEach(object -> print(object.toString()));
     }
 
     public void print(Menu menu) {

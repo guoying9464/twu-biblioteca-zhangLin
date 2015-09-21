@@ -59,7 +59,7 @@ public class PrinterTest {
         Menu menu = new Menu(menuItem);
 
         String expect =
-                "1\tSearchCatalog\n2\tQuit\n";
+                "1\tBook SearchCatalog\n2\tQuit\n";
         printer.print(menu);
         assertThat(output.toString(), is(expect));
 

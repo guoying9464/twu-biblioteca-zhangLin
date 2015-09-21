@@ -5,8 +5,8 @@ import com.twu.biblioteca.Printer;
 import com.twu.biblioteca.library.Librarian;
 
 public class Return implements Operation {
-    public static final String SUCCESSFUL_RETURN_MESSAGE = "Thank you for returning the book.";
-    public static final String UNSUCCESSFUL_RETURN_MESSAGE = "That is not a valid book to return.";
+    public static final String SUCCESSFUL_RETURN_MESSAGE = "Thank you for returning the %s.";
+    public static final String UNSUCCESSFUL_RETURN_MESSAGE = "That is not a valid %s to return.";
     private Printer printer;
     private Inputer inputer;
     private Librarian librarian;
@@ -19,20 +19,27 @@ public class Return implements Operation {
 
     @Override
     public void operate() {
-        printer.print("Please Input Book's Name:");
+        String successMsg = String.format(SUCCESSFUL_RETURN_MESSAGE, getElementName());
+        String unsuccessMsg = String.format(UNSUCCESSFUL_RETURN_MESSAGE, getElementName());
 
+        printer.print(String.format("Please Input The %s Name:", getElementName()));
         String bookName = inputer.input();
         int result = librarian.returnBook(bookName);
         if (1 == result) {
             librarian.returnBook(bookName);
-            printer.print(SUCCESSFUL_RETURN_MESSAGE);
+            printer.print(successMsg);
         }else{
-            printer.print(UNSUCCESSFUL_RETURN_MESSAGE);
+            printer.print(unsuccessMsg);
         }
+    }
+
+    private String getElementName() {
+        return librarian.getLibrary().getName();
     }
 
     @Override
     public String toString() {
-        return "Return Book";
+        return String.format("%s %s", "Return", getElementName());
+
     }
 }

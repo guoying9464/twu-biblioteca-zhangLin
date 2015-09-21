@@ -19,32 +19,32 @@ public class LibrarianTest {
         books.add(new Book("Grimm's Fairy Tales", "Jacob Grimm", "2011"));
         books.add(new Book("Wuthering Heights", "Emily Bronte", "2011"));
         books.add(new Book("Moon and Sixpence", "W. Somerset", "2012"));
-        library = new Library(books);
+        library = new Library(books, "Book");
         librarian = new Librarian(library);
     }
 
     @Test
     public void testCanCheckoutBook() throws Exception {
-        int result = librarian.checkoutBook("Grimm's Fairy Tales");
+        int result = librarian.checkout("Grimm's Fairy Tales");
         assertThat(result, is(1));
     }
 
     @Test
     public void testCannotCheckoutBookForNonexistentBook() throws Exception {
-        int result = librarian.checkoutBook("JAVA");
+        int result = librarian.checkout("JAVA");
         assertThat(result, is(0));
     }
 
     @Test
     public void testCannotCheckoutBookForBorrowedBook() throws Exception {
-        librarian.checkoutBook("Grimm's Fairy Tales");
-        int result = librarian.checkoutBook("Grimm's Fairy Tales");
+        librarian.checkout("Grimm's Fairy Tales");
+        int result = librarian.checkout("Grimm's Fairy Tales");
         assertThat(result, is(0));
     }
 
     @Test
     public void testCanReturnBook() throws Exception {
-        librarian.checkoutBook("Grimm's Fairy Tales");
+        librarian.checkout("Grimm's Fairy Tales");
         int result = librarian.returnBook("Grimm's Fairy Tales");
         assertThat(result, is(1));
     }
